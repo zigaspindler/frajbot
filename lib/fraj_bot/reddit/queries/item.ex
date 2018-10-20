@@ -48,4 +48,9 @@ defmodule FrajBot.Reddit.Queries.Item do
     from i in query,
     where: i.type == ^"gif"
   end
+
+  def older_than(query, date \\ Timex.shift(Timex.now, days: -7)) do
+    from i in query,
+    where: i.inserted_at < ^date
+  end
 end

@@ -8,6 +8,7 @@ defmodule Mix.Tasks.FrajBot.ParseReddit do
   def run(_args) do
     HTTPoison.start()
     ensure_started(FrajBot.Repo, [])
+    Application.ensure_all_started(:timex)
 
     FrajBot.Reddit.parse()
     

@@ -18,6 +18,8 @@ config :fraj_bot, FrajBotWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :tzdata, :autoupdate, :disabled
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

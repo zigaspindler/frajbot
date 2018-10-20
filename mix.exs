@@ -20,7 +20,7 @@ defmodule FrajBot.MixProject do
   def application do
     [
       mod: {FrajBot.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -43,7 +43,8 @@ defmodule FrajBot.MixProject do
       {:jason, "~> 1.0"},
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 1.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 

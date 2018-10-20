@@ -2,7 +2,7 @@ defmodule FrajBot.Reddit.Services.Api do
   use HTTPoison.Base
 
   def get_posts(subreddit, token) do
-    case get("/r/#{subreddit}/new", ["Authorization": "bearer #{token}"]) do
+    case get("/r/#{subreddit}/hot", ["Authorization": "bearer #{token}"]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, body}
       {:error, %HTTPoison.Error{reason: reason}} ->
