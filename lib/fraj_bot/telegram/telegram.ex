@@ -14,20 +14,30 @@ defmodule FrajBot.Telegram do
     |> Enum.map(&format_item/1)
     |> Responder.respond(id, :inline)
   end
-  def respond_to_inline_query(%{"message" => %{"chat" => %{"id" => id}, "from" => %{"first_name" => name}, "text" => "/photo"}}) do
+  def respond_to_inline_query(%{"message" => %{"text" => "/photo"}} = data),
+    do: respond_with_jpg(data)
+  def respond_to_inline_query(%{"message" => %{"text" => "/photo@frajbot"}} = data),
+    do: respond_with_jpg(data)
+  def respond_to_inline_query(%{"message" => %{"text" => "/gif"}} = data),
+    do: respond_with_gif(data)
+  def respond_to_inline_query(%{"message" => %{"text" => "/gif@frajbot"}} = data),
+    do: respond_with_gif(data)
+  def respond_to_inline_query(_),
+    do: nil
+
+  defp respond_with_jpg(%{"message" => %{"chat" => %{"id" => id}, "from" => %{"first_name" => name}}}) do
     Queries.Item.random_photo()
     |> Repo.one
     |> Map.put(:name, name)
     |> Responder.respond(id, :photo)
   end
-  def respond_to_inline_query(%{"message" => %{"chat" => %{"id" => id}, "from" => %{"first_name" => name}, "text" => "/gif"}}) do
+
+  defp respond_with_gif(%{"message" => %{"chat" => %{"id" => id}, "from" => %{"first_name" => name}}}) do
     Queries.Item.random_gif()
     |> Repo.one
     |> Map.put(:name, name)
     |> Responder.respond(id, :gif)
   end
-  def respond_to_inline_query(_),
-    do: nil
 
   defp format_item(%Item{type: "gif"} = item) do
     %{
