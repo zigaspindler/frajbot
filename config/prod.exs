@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :fraj_bot, FrajBotWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [scheme: "https", host: "stormy-everglades-95026.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "frajbot.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
@@ -73,8 +73,7 @@ config :fraj_bot, :reddit,
   client_id: System.get_env("REDDIT_CLIENT_ID"),
   secret: System.get_env("REDDIT_SECRET")
 
-config :fraj_bot, :telegram,
-  bot_token: System.get_env("TELEGRAM_BOT_TOKEN")
+config :fraj_bot, :telegram, bot_token: System.get_env("TELEGRAM_BOT_TOKEN")
 
 config :fraj_bot, FrajBot.Repo,
   adapter: Ecto.Adapters.Postgres,
