@@ -9,8 +9,11 @@ defmodule FrajBot.Reddit.Services.Parse do
   }
 
   def run() do
-    delete_old_items()
-    fetch_new_items()
+    try do
+      fetch_new_items()
+    after
+      delete_old_items()
+    end
   end
 
   defp fetch_new_items() do
